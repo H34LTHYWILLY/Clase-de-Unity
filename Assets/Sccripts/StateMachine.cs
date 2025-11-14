@@ -13,8 +13,7 @@ public enum ECharacterState
 
 public class StateMachine : MonoBehaviour
 {
-
-    static public StateMachine Instance;
+    public static StateMachine Instance;
 
     ECharacterState state = ECharacterState.moviendose;
 
@@ -58,7 +57,18 @@ public class StateMachine : MonoBehaviour
 
     void Start()
     {
-       Instance = this;
+        if(Instance != null)
+        {
+            Debug.LogError("State Machine created twice.");
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void OnDisable()
+    {
+        Instance = null;
     }
 
     // Update is called once per frame
