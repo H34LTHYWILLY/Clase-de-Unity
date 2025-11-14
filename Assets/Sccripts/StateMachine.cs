@@ -25,6 +25,12 @@ public class StateMachine : MonoBehaviour
 
     public bool CambiarEstado(ECharacterState EstadoNuevo)
     {
+
+        if (EstadoNuevo == state) 
+        {
+            return false;
+        }
+
         switch(state)
         {
             case ECharacterState.movimientoyCamaraDesabilitado: 
@@ -43,10 +49,6 @@ public class StateMachine : MonoBehaviour
         
         }
 
-        if (EstadoNuevo == state) 
-        {
-            return false;
-        }
 
         print("Estado " + state + " cambia a " + EstadoNuevo);
         state = EstadoNuevo;

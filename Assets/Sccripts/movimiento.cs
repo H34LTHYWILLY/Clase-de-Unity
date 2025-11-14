@@ -21,6 +21,7 @@ public class movimiento : MonoBehaviour
 
         if (StateMachine.Instance.ObtenerEstado() != ECharacterState.moviendose)
         {
+            rigidBody.velocity = Vector3.zero;
             return;
         }
 
@@ -59,7 +60,7 @@ public class movimiento : MonoBehaviour
 
         direccion = direccion.normalized;
 
-        ////transform.position = transform.position + direccion / 100;
+        //transform.position = transform.position + direccion / 100;
         //transform.position = transform.position + (transform.forward * direccion.z * velocidadActual * Time.deltaTime);
         //transform.position = transform.position + (transform.right * direccion.x * velocidadActual * Time.deltaTime);
         //transform.position = transform.position + (transform.up * direccion.y * velocidadActual * Time.deltaTime);

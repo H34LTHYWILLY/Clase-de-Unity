@@ -11,17 +11,9 @@ public class interaccionar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        //float valor = 1;
-
-        //valor = Sumar(ref valor, -1);
-
-        //Sumar(ref valor, -1);
-
-        //print("sumar:" + valor);
-
-        //print("multiplicar: " + Multiplicar(3, 4));
     }
 
 
@@ -31,9 +23,10 @@ public class interaccionar : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (StateMachine.Instance.CambiarEstado(ECharacterState.inspeccionando))
+            if (StateMachine.Instance.ObtenerEstado() == ECharacterState.moviendose)
             {
                 Interact();
+                
                 
             }
             else if (StateMachine.Instance.ObtenerEstado() == ECharacterState.inspeccionando)
@@ -61,6 +54,7 @@ public class interaccionar : MonoBehaviour
 
             if (baseClass != null)
             {
+                StateMachine.Instance.CambiarEstado(ECharacterState.inspeccionando);
                 baseClass.Interaccionar();
             }
         }
@@ -72,24 +66,4 @@ public class interaccionar : MonoBehaviour
         StateMachine.Instance.CambiarEstado(ECharacterState.moviendose);
     }
 
-
-    //float Sumar(ref float uno, float dos)
-    //{
-    //    uno += dos;
-    //    return uno;
-    //}
-
-    //float Multiplicar(float valor1, float multiplicador)
-    //{
-    //    return SumarNveces(0, valor1, multiplicador);
-    //}
-    //float SumarNveces(float valor1, float suma, float numeroDeVeces)
-    //{
-    //    if (numeroDeVeces == 1)
-    //    {
-    //        return Sumar(valor1, suma);
-    //    }
-
-    //    return Sumar(suma, SumarNveces(valor1, suma, numeroDeVeces - 1));
-    //}
 }
