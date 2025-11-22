@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IBaseReact
 {
     public void Interaccionar();
+    public void DejarDeInteraccionar();
 }
