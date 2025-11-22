@@ -48,12 +48,12 @@ public class interaccionar : MonoBehaviour
 
         if (golpeandoAlgo == true)
         {
-            print(raycastHit.transform.name);
-
             IBaseReact baseClass = raycastHit.transform.GetComponent<IBaseReact>();
 
             if (baseClass != null)
             {
+                print(raycastHit.transform.name);
+                
                 StateMachine.Instance.CambiarEstado(ECharacterState.inspeccionando);
                 baseClass.Interaccionar();
             }

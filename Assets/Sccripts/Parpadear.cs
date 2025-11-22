@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Parpadear : MonoBehaviour
 {
-
-    [SerializeField] GameObject parpadoSuperior;
-
-    [SerializeField] GameObject parpadoInferior;
-
-    [SerializeField] float distanciaEntreParpados = 0.5f;
-
-    [SerializeField] float distanciaInicialEntreParpados = 0.25f;
+    [SerializeField] RectTransform parpadoSuperior;
+    [SerializeField] RectTransform parpadoInferior;
 
     [SerializeField] float tiempoDeParpadeo = 1f;
 
@@ -64,17 +58,15 @@ public class Parpadear : MonoBehaviour
     {
         isCoroutineRunning = true;
 
-        Vector3 posicionInicialSuperior = new Vector3(0, distanciaInicialEntreParpados, parpadoSuperior.transform.localPosition.z);
+        float parpadoHeight = parpadoSuperior.rect.height;
 
-        Vector3 posicionInicialInferior = new Vector3(0, -distanciaInicialEntreParpados, parpadoSuperior.transform.localPosition.z);
+        Vector3 posicionInicialSuperior = new Vector3(0, -parpadoHeight, 0);
+        Vector3 posicionInicialInferior = new Vector3(0, parpadoHeight, 0);
 
-        Vector3 posicionFinalSuperior = new Vector3(0, distanciaEntreParpados, parpadoSuperior.transform.localPosition.z);
-
-        Vector3 posicionFinalInferior = new Vector3(0, -distanciaEntreParpados, parpadoSuperior.transform.localPosition.z);
-
+        Vector3 posicionFinalSuperior = Vector3.zero;
+        Vector3 posicionFinalInferior = Vector3.zero;
 
         float porcentajeDeApertura = bEstaAbriendo ? 0 : 1; //condicional ternario
-
 
 
         while ((bEstaAbriendo == true & porcentajeDeApertura != 1) | (bEstaAbriendo == false & porcentajeDeApertura != 0))
@@ -99,14 +91,12 @@ public class Parpadear : MonoBehaviour
             }
          
 
-            parpadoSuperior.transform.localPosition = Vector3.Lerp(posicionInicialSuperior, posicionFinalSuperior, porcentajeDeApertura);
-
-            parpadoInferior.transform.localPosition = Vector3.Lerp(posicionInicialInferior, posicionFinalInferior, porcentajeDeApertura);
+            parpadoSuperior.anchoredPosition = Vector3.Lerp(posicionInicialSuperior, posicionFinalSuperior, porcentajeDeApertura);
+            parpadoInferior.anchoredPosition = Vector3.Lerp(posicionInicialInferior, posicionFinalInferior, porcentajeDeApertura);
 
             yield return null;
         }
 
         isCoroutineRunning = false;
-
     }
 }
