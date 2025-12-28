@@ -23,24 +23,12 @@ public class interaccionar : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (StateMachine.Instance.ObtenerEstado() == ECharacterState.moviendose)
-            {
-                Interact();
-                
-                
-            }
-            else if (StateMachine.Instance.ObtenerEstado() == ECharacterState.inspeccionando)
-            {
-                StopInteracting();
-
-            }
-
-
+            TryToInteractWithObjectInFront();
         }
 
     }
 
-    void Interact()
+    void TryToInteractWithObjectInFront()
     {
         RaycastHit raycastHit;
 
@@ -48,22 +36,14 @@ public class interaccionar : MonoBehaviour
 
         if (golpeandoAlgo == true)
         {
-            IBaseReact baseClass = raycastHit.transform.GetComponent<IBaseReact>();
+            ObjetoInteraccionable baseClass = raycastHit.transform.GetComponent<ObjetoInteraccionable>();
 
             if (baseClass != null)
             {
                 print(raycastHit.transform.name);
-                
-                StateMachine.Instance.CambiarEstado(ECharacterState.inspeccionando);
                 baseClass.Interaccionar();
             }
         }
 
     }
-
-    void StopInteracting()
-    {
-        StateMachine.Instance.CambiarEstado(ECharacterState.moviendose);
-    }
-
 }

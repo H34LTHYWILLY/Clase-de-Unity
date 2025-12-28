@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class rotacioncamara : MonoBehaviour
 {
+
+
     // Start is called before the first frame update
-
-
     void Start()
     {
         mainCamara = GetCamera();
@@ -21,6 +21,10 @@ public class rotacioncamara : MonoBehaviour
 
     void Update()
     {
+        if (StateMachine.Instance.ObtenerEstado() != ECharacterState.moviendose)
+        {
+            return;
+        }
 
         float rotacionX = Input.GetAxisRaw("Mouse X");
 
