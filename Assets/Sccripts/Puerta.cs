@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Puerta : ObjetoInteraccionable
 {
-    bool hasInteracted = false;
-    
+    private float interacciones = 0;
+
     [SerializeField] float rotacionASumar = 90;
     [SerializeField] float velocidad = 60;
     float cuantoHeGirado = 0;
@@ -14,17 +13,17 @@ public class Puerta : ObjetoInteraccionable
     public override void Interaccionar()
     {
         // Exit clause.
-        if (hasInteracted)
+        if (interacciones > 0)
             return; // Deja de ejecutar.
 
         // Si la Exit Clause es falsa.
-        hasInteracted = true;
+        interacciones++;
     }
 
     private void Update()
     {
         // Exit clause.
-        if (!hasInteracted)
+        if (interacciones > 0)
             return; // Deja de ejecutar.
 
         if (cuantoHeGirado < rotacionASumar) // Si el loop ha ocurrido < de 18 veces.
