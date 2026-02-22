@@ -3102,11 +3102,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1586854826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abb5b09c4eab6dd468a791623be94ae3, type: 3}
+  m_Script: {fileID: 11500000, guid: 755da7813d7079747aee10302dced603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotacionASumar: -90
-  velocidad: -60
+  rotacionASumar: 90
+  velocidad: 60
+  abrirHaciaAtras: 1
 --- !u!65 &1586854829
 BoxCollider:
   m_ObjectHideFlags: 0
