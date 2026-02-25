@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Puerta : ObjetoInteraccionable
 {
-    float interacciones = 0;
-    float cuantoHeGirado = 0;
+    private float interacciones = 0;
+    private float cuantoHeGirado = 0;
 
     [SerializeField][Range(5, 200)] float rotacionASumar = 90;
     [SerializeField][Range(5, 200)] float velocidad = 60;
@@ -13,6 +13,9 @@ public class Puerta : ObjetoInteraccionable
 
     public override void Interaccionar()
     {
+        if (!PuedoAbrirPuerta())
+            return;
+
         // Exit clause.
         if (interacciones > 0)
             return; // Deja de ejecutar.
@@ -23,7 +26,7 @@ public class Puerta : ObjetoInteraccionable
 
     private void Update()
     {
-        if (AbrirPuerta())
+        if (HacerAnimacionAbrirPuerta())
         {
             float rotacionExtra = velocidad * Time.deltaTime;
             if (abrirHaciaAtras)
@@ -35,7 +38,7 @@ public class Puerta : ObjetoInteraccionable
         }
     }
 
-    protected virtual bool AbrirPuerta()
+    protected bool HacerAnimacionAbrirPuerta()
     {
         // Exit clause => Cuando no hayamos interaccionado (interacciones no es mayor que 0)
         if (interacciones == 0)
@@ -44,6 +47,11 @@ public class Puerta : ObjetoInteraccionable
         if (cuantoHeGirado >= rotacionASumar) // Si el loop ha ocurrido < de 18 veces.
             return false;
 
+        return true;
+    }
+
+    protected virtual bool PuedoAbrirPuerta()
+    {
         return true;
     }
 }
