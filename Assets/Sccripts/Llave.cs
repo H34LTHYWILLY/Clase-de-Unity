@@ -8,6 +8,7 @@ public partial class Llave : ObjetoInteraccionable
 {
     public int id = -1;
 
+    static public List<int> idList = new List<int>();
     public override void Interaccionar()
     {
         if (id == -1)
@@ -18,18 +19,9 @@ public partial class Llave : ObjetoInteraccionable
 
         Destroy(gameObject);
 
-        PuertaObstruida[] todasLasPuertas = Object.FindObjectsOfType<PuertaObstruida>();
 
-        //                                  ( ALGO QUE EVALUE A BOOL )
-        // for( DECLARAMOS UNA VARIABLE ; CONDICION PARA REPETIR EL LOOP ; ACCION AL ACABAR EL LOOP )
-        for (int x = 0; x < todasLasPuertas.Length; x++)
-        {
-            PuertaObstruida puerta = todasLasPuertas[x];
-            if (puerta.id == id)
-            {
-                puerta.tengoLlave = true;
-            }
-        }
+        idList.Add(id);
+
     }
 
 #if UNITY_EDITOR

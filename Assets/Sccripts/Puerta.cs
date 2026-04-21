@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Puerta : ObjetoInteraccionable
     [SerializeField][Range(5, 200)] float velocidad = 60;
     [SerializeField] bool abrirHaciaAtras = false;
 
+    [SerializeField] public  Action alAbrir = null;
+
     public override void Interaccionar()
     {
         if (!PuedoAbrirPuerta())
@@ -22,6 +25,10 @@ public class Puerta : ObjetoInteraccionable
 
         // Si la Exit Clause es falsa.
         interacciones++;
+        if (alAbrir != null)
+        {
+            alAbrir.Invoke();
+        }
     }
 
     private void Update()

@@ -12,6 +12,7 @@ public class movimiento : MonoBehaviour
 
     void Start()
     {
+
          rigidBody = GetComponent<Rigidbody>();
     }
 
@@ -65,7 +66,7 @@ public class movimiento : MonoBehaviour
         //transform.position = transform.position + (transform.right * direccion.x * velocidadActual * Time.deltaTime);
         //transform.position = transform.position + (transform.up * direccion.y * velocidadActual * Time.deltaTime);
 
-
+        
         Vector3 velocidad = transform.forward * direccion.z * velocidadActual + transform.right * direccion.x * velocidadActual;
 
         rigidBody.velocity = velocidad;

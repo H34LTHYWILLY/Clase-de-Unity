@@ -5,9 +5,9 @@ using UnityEngine;
 public class PuertaObstruida : Puerta
 {
     public int id = -1;
-    [HideInInspector] public bool tengoLlave = false;
+    
     protected override bool PuedoAbrirPuerta()
     {
-        return tengoLlave;
+        return Llave.idList.Contains(id);
     }
 }
