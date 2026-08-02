@@ -1,3 +1,4 @@
+using DoorScript;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,9 +12,14 @@ public class Puerta : ObjetoInteraccionable
     [SerializeField][Range(5, 200)] float rotacionASumar = 90;
     [SerializeField][Range(5, 200)] float velocidad = 60;
     [SerializeField] bool abrirHaciaAtras = false;
+    [SerializeField] public Action alAbrir = null;
 
-    [SerializeField] public  Action alAbrir = null;
+    DoorAudio myDoorAudio;
 
+    public void Start()
+    {
+        myDoorAudio = GetComponent<DoorAudio>();
+    }
     public override void Interaccionar()
     {
         if (!PuedoAbrirPuerta())
@@ -29,6 +35,8 @@ public class Puerta : ObjetoInteraccionable
         {
             alAbrir.Invoke();
         }
+
+        myDoorAudio.OpenDoor();
     }
 
     private void Update()
@@ -40,8 +48,8 @@ public class Puerta : ObjetoInteraccionable
                 rotacionExtra = rotacionExtra * -1;
             cuantoHeGirado += Mathf.Abs(rotacionExtra);
 
-            transform.parent.rotation = Quaternion.Euler(
-                transform.parent.rotation.eulerAngles + new Vector3(0, rotacionExtra, 0));
+            transform.rotation = Quaternion.Euler(
+                transform.rotation.eulerAngles + new Vector3(0, rotacionExtra, 0));
         }
     }
 
